@@ -1,0 +1,23 @@
+{
+  "name": "kbe-nuxt-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "nuxt": "^4.0.0",
+    "vue": "latest"
+  },
+  "devDependencies": {
+    "@nuxt/test-utils": "^4.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "happy-dom": "^21.0.0",
+    "vitest": "^5.0.0"
+  }
+}
