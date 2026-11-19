@@ -1,10 +1,15 @@
 <script setup lang="ts">
 const route = useRoute()
-const { data: modules } = await useFetch('/api/modules')
+const { data: currentModule, error } = await useModule(route.params.id as string)
 
-const currentModule = computed(() =>
-    modules.value?.find((m) => m.id === Number(route.params.id))
-)
+if (error.value || !currentModule.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Modul nicht gefunden', fatal: true })
+}
+
+useSeoMeta({
+  title: () => `${currentModule.value?.title} – KBE Nuxt Demo`,
+  description: () => currentModule.value?.description
+})
 </script>
 
 <template>
@@ -14,8 +19,5 @@ const currentModule = computed(() =>
     <p><strong>ECTS:</strong> {{ currentModule.ects }}</p>
     <p><strong>Dozent:</strong> {{ currentModule.lecturer }}</p>
     <p>{{ currentModule.description }}</p>
-  </div>
-  <div v-else>
-    <p>Modul nicht gefunden.</p>
   </div>
 </template>
